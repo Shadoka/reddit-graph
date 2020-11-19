@@ -5,6 +5,7 @@ import com.shadoka.graph.model.Author;
 import com.shadoka.graph.model.Relation;
 import com.shadoka.graph.model.Status;
 import com.shadoka.graph.model.Subreddit;
+import com.shadoka.graph.outbound.ImageUrl;
 import com.shadoka.graph.outbound.User;
 import com.shadoka.graph.reddit.RedditWrapper;
 import com.shadoka.graph.repository.AuthorRepository;
@@ -136,6 +137,18 @@ public class SubredditController {
 
         this.authorRepository.deleteAll(toDelete);
         this.subredditRepo.delete(sub);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping(path = "/subreddits/{name}/image", produces = "application/hal+json")
+    public ImageUrl getImageUrl(@PathVariable String name) {
+        if (!Validation.isValidSubreddit(name)) {
+            throw new InvalidSubredditRequest();
+        }
+
+        ImageUrl url = new ImageUrl();
+        url.setUrl(this.subredditRepo.getImageUrlByName(name));
+        return url;
     }
 
     /**

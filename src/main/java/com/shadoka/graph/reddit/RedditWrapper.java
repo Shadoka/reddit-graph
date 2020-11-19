@@ -12,6 +12,7 @@ import net.dean.jraw.models.*;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 import net.dean.jraw.pagination.DefaultPaginator;
+import net.dean.jraw.references.SubredditReference;
 import net.dean.jraw.tree.CommentNode;
 import net.dean.jraw.tree.ReplyCommentNode;
 import net.dean.jraw.tree.RootCommentNode;
@@ -35,7 +36,7 @@ public class RedditWrapper {
                          @Value("${reddit.userpassword}") String userPw,
                          @Value("${reddit.clientId}") String clientId,
                          @Value("${reddit.clientSecret}") String clientSecret) {
-        UserAgent agent = new UserAgent("bot", "com.shadoka.reddit.data", "0.0.1", "theshadoka");
+        UserAgent agent = new UserAgent("bot", "com.shadoka.reddit.data", "0.0.1", userName);
         Credentials cred = Credentials.script(userName, userPw, clientId, clientSecret);
         NetworkAdapter adapter = new OkHttpNetworkAdapter(agent);
         this.client = OAuthHelper.automatic(adapter, cred);
@@ -43,11 +44,13 @@ public class RedditWrapper {
 
     public Pair<Subreddit, Set<Relation>> readSubreddit(String name) {
         long start = System.currentTimeMillis();
-        DefaultPaginator<Submission> paginator =  this.client.subreddit(name).posts().sorting(SubredditSort.TOP).build();
+        SubredditReference sub = this.client.subreddit(name);
+        DefaultPaginator<Submission> paginator =  sub.posts().sorting(SubredditSort.TOP).build();
         List<Listing<Submission>> posts = paginator.accumulate(4);
 
         Subreddit subreddit = new Subreddit();
         subreddit.setName(name);
+        subreddit.setBannerImageUrl(sub.about().getBannerImage());
 
         Map<String, Author> authorMap = new HashMap<>();
         Map<Integer, String> depthMap = new HashMap<>();

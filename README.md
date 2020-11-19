@@ -4,8 +4,9 @@ reddit-graph aims to be a tool to load publicly available data from reddit.
 Specifically, it will load data from a given subreddit as a social graph into a relational database.
 
 This data consists of all the users, who made a submission or post on a "hot" topic. By default, four pages are being 
-loaded into the database. Loading data of a subreddit takes about 90-120 seconds via Reddit API and additional ~30
-seconds to persist the data into the database. The data model is probably bad and will be changed at a later date.
+loaded into the database. Loading data of a subreddit takes about 90-120 seconds via Reddit API (not a lot we can do 
+about that) and additional ~30 seconds to persist the data into the database (presumably a lot we can do about this).
+ The data model is probably bad and will be changed at a later date.
 
 The application offers HTTP endpoints to query the data.
 

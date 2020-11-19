@@ -26,6 +26,8 @@ public class Subreddit {
 
     private String name;
 
+    private String bannerImageUrl;
+
     @ManyToMany
     @JoinTable(
             name = "authors_in",
@@ -95,5 +97,13 @@ public class Subreddit {
 
     public void setImportDate(Timestamp importDate) {
         this.importDate = importDate;
+    }
+
+    public String getBannerImageUrl() {
+        return bannerImageUrl;
+    }
+
+    public void setBannerImageUrl(String bannerImageUrl) {
+        this.bannerImageUrl = bannerImageUrl;
     }
 }
