@@ -1,6 +1,7 @@
 package com.shadoka.graph.outbound;
 
 public class ImageUrl {
+
     private String url;
 
     public String getUrl() {

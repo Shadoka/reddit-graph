@@ -18,6 +18,7 @@ The application offers HTTP endpoints to query the data.
         * *application.properties*: spring.datasource.password
         * *reddit_credentials.properties*: reddit.username, reddit.userpassword, reddit.clientId, reddit.clientSecret
     * run the application with **gradlew -Djasypt.encryptor.password=yourjasyptpassword bootRun** or edit run config in your IDE
+    * you can always choose to put your credentials in plaintext and ignore this
 * database is PostGreSQL, credentials are to be supplied via application.properties
 * access to reddit developer api is neccessary, along with a user account. to be supplied in reddit_credentials.properties
 
@@ -25,6 +26,12 @@ The application offers HTTP endpoints to query the data.
 
 Documentation will follow when I'm fairly sure that the interface is stable enough for it. For now, just dig a bit into
 the *controller* package.
+
+## is there a frontend?
+
+I'm trying my hand at JavaScript, so im developing a node.js + react [frontend application](https://github.com/Shadoka/reddit-graph-frontend).
+
+The plan is to use d3.js to visualize the data.
 
 ## why a relational database, isn't that a bit painful?
 
