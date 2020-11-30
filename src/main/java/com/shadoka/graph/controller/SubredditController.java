@@ -103,7 +103,7 @@ public class SubredditController {
         sub.getAuthors().forEach(a -> userMap.put(a.getName(), User.createFromAuthor(a)));
 
         return sub.getAuthors().stream()
-                .map(a -> Pair.with(a.getName(), this.relationRepository.findRelationByAuthorId(a.getId())))
+                .map(a -> Pair.with(a.getName(), this.relationRepository.findRelationByAuthorId(a.getId(), sub.getId())))
                 .map(tuple -> userMap.get(tuple.getValue0()).addRelations(userMap, tuple.getValue1()))
                 .collect(Collectors.toList());
     }

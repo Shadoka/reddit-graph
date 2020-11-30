@@ -64,7 +64,7 @@ public class UserController {
         for (Author a : sub.getAuthors()) {
             List<String> friends = new ArrayList<>();
 
-            List<Relation> relations = this.relationRepo.findRelationByAuthorId(a.getId());
+            List<Relation> relations = this.relationRepo.findRelationByAuthorId(a.getId(), sub.getId());
             relations.forEach(rel -> {
                 if (rel.getFrom().getName().equals(a.getName())) {
                     friends.add(rel.getTo().getName());

@@ -12,6 +12,6 @@ public interface RelationRepository extends CrudRepository<Relation, Long> {
 
     public Set<Relation> findRelationsBySubreddit(Subreddit sub);
 
-    @Query("select r from Relation r where r.from.id = ?1 or r.to.id = ?1")
-    public List<Relation> findRelationByAuthorId(Long authorId);
+    @Query("select r from Relation r where r.from.id = ?1 or r.to.id = ?1 and r.subreddit.id = ?2")
+    public List<Relation> findRelationByAuthorId(Long authorId, Long subredditId);
 }
